@@ -2,7 +2,7 @@
 
 
 <center><h2>Git学习笔记</h2></center>
-### Git介绍
+### Git介绍  
 ***
 - Git是分布式版本控制系统
 - 集中式VS分布式：   
@@ -13,43 +13,43 @@
 
 ### Git命令
 ***
-   
+
 #### Git配置
     $ git config --global user.name "Your Name"
     $ git config --global user.email "email@example.com"  
 注意`git config`命令的`--global`参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。
-   
+
 
 #### 创建版本库
-#####在当前目录创建git仓库
+##### 在当前目录创建git仓库
     $ git init 
-   
-#####把文件添加到仓库
+
+##### 把文件添加到仓库
     $ git add <file>
     $ git commit
 `git add`可以反复多次使用，添加多个文件，`git commit`可以一次提交很多文件，在`git commit`命令后添加(-m '····')方便从历史记录里找到修改记录。
-   
 
-####掌握工作区的状态
+
+#### 掌握工作区的状态
     $ git status 
-    
-####查看文件修改内容
+
+#### 查看文件修改内容
     $ git diff
 
-####版本回退
+#### 版本回退
     $ git reset -- hard HEAD^
 HEAD指向的版本是当前版本，回到上一版本使用以上命令，如果回退上两个版本使用`HEAD^^`，如果回退版本数较大（如往上50个版本），使用`HEAD~50`。
-####回退指定版本
+#### 回退指定版本
     $ git reset --hard commit_id
 `commit_id`是指定版本号，是由SHA1计算出来的数字
 
-####查看提交历史
+#### 查看提交历史
     $ git log   
 
-####查看命令历史
+#### 查看命令历史
     $ git reflog
 
-####工作区、暂存区和版本库
+#### 工作区、暂存区和版本库
 git与其他版本控制系统的不同之处就是有暂存区的概念，工作区就是电脑中能看到的目录，工作区有一个隐藏目录[.git]，这是git的版本库。版本库里有许多东西，最重要的是称为stage的暂存区。   
 
 ![](https://cdn.liaoxuefeng.com/cdn/files/attachments/001384907702917346729e9afbf4127b6dfbae9207af016000/0)
@@ -61,8 +61,8 @@ git与其他版本控制系统的不同之处就是有暂存区的概念，工�
 </ul>
 Git是如何跟踪修改的，每次修改，如果不用git add到暂存区，那就不会加入到commit中。  
 
-####撤销修改
-#####丢弃工作区的修改
+#### 撤销修改
+##### 丢弃工作区的修改
     $ git checkout -- <file>
 该命令是将文件在工作去的修改全部撤销，这里有两种情况：
 <ol>
@@ -71,12 +71,12 @@ Git是如何跟踪修改的，每次修改，如果不用git add到暂存区，�
 </ol>
 总之，就是让这个文件回到最近一次git commit或git add时的状态。
 
-#####丢弃暂存区的修改
+##### 丢弃暂存区的修改
 改乱了工作区某个文件的内容同时还添加到了暂存区，想丢弃修改时，先使用命令`git reset HEAD <file>`，之后按撤销工作区修改进行操作。
-#####进行了commit命令提交的修改
+##### 进行了commit命令提交的修改
 已经提交了不合适的修改到版本库时，想要撤销修改，使用版本回退命令，前提是没有推送到远程库.
 
-####删除文件
+#### 删除文件
     $ git rm <file>
 当你要删除文件`text.txt`的时候，可以采用命令：`rm test.txt`
 这个时候有两种情况：<br>
@@ -88,63 +88,63 @@ Git是如何跟踪修改的，每次修改，如果不用git add到暂存区，�
 如果执行完`git commit -m "remove test.txt"`后就不能用`checkout`恢复了，得用`git reset --hard HEAD^`，再从版本库写回到工作区。<br>
 `git rm`用于删除一个文件。如果一个文件已经被提交到版本库，那么你永远不用担心误删，但是要小心，你只能恢复文件到最新版本，你会丢失最近一次提交后你修改的内容。
 
-####远程仓库
-#####创建SSH Key 
+#### 远程仓库
+##### 创建SSH Key 
     $ ssh-keygen -t rsa -C "youremail@example.com"
 
-#####关联远程仓库
+##### 关联远程仓库
     $ git remote add origin https://github.com/username/repositoryname.git
 
-#####推送到远程仓库
+##### 推送到远程仓库
     $ git push -u origin master
 -u 表示第一次推送master分支的所有内容，此后，每次本地提交后，只要有必要，就可以使用命令`$ git push origin master`推送最新修改。
 
-#####从远程克隆
+##### 从远程克隆
     $ git clone https://github.com/usern/repositoryname.git
 <strong>注意:</strong>当你不能使用`git@github.com`命令来进行推送和克隆，是因为没有安装密钥。添加私秘钥到`$ ssh-add ~/.ssh/id_rsa`<br>
 如果添加失败可以先执行命令<code>$ eval \`ssh-agent\`</code> \`是～键上的那个符号，然后再次添加私秘钥。<br>
 用`$ ssh -T git@github.com`判断是否绑定成功。如果返回`successfully`表示成功。
 
 
-####分支管理
-#####查看分支
+#### 分支管理
+##### 查看分支
     $ git branch
 
-#####创建分支
+##### 创建分支
     $ git branch <name>
 
-#####切换分支
+##### 切换分支
     $　git checkout <name>
 
-#####创建+切换分支
+##### 创建+切换分支
     $ git checkout -b <name>
 
-#####合并某分支到当前name分支
+##### 合并某分支到当前name分支
     $ git merge <name>
 
-#####删除分支
+##### 删除分支
     $ git branch -d <name>
 
-#####强行删除分支
+##### 强行删除分支
     $ git branch -D <name>
 如果要丢弃一个没有被合并过的分支，可以通过以上命令来实现。
 
-#####查看分支合并图
+##### 查看分支合并图
     $ git log --graph
 当Git无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。
 用`git log --graph`命令可以看到分支合并图。
 
-#####普通模式合并分支
+##### 普通模式合并分支
     $ git merge --no-ff -m "description" <branchname>
 通常进行分支合并时，git会使用Fast forward模式，删除分支后，分支信息会丢失，可以使用`--on-ff`参数，禁用Fast forward，需要时加上一个`-m`参数把commit描述写进去。这样进行合并后的历史有分支，能看出来曾经做过合并。
 
-#####保存工作现场
+##### 保存工作现场
     $ git stash  
-#####查看工作现场
+##### 查看工作现场
     $ git stash list
-#####恢复工作现场 
+##### 恢复工作现场 
     $ git stash pop
-#####在新建分支中修改bug时的推荐操作
+##### 在新建分支中修改bug时的推荐操作
 转自[教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)讨论区“我有疫苗”用户的[评论](https://www.liaoxuefeng.com/discuss/001409195939432748a2c9fae3846bc98b3c2a547fa321b000/0015444271534391cee28ca27ed474d97b30b2b0ad6b534000)
 <pre>
 首先理清两个概念：
@@ -162,38 +162,38 @@ Git是如何跟踪修改的，每次修改，如果不用git add到暂存区，�
    所以需要git stash，这样在提交修改bug代码的时候 ，就不会看见readme.md 和 test。可以安心提交修改bug的代码。
 </pre>
 
-#####查看远程库信息
+##### 查看远程库信息
     $ git remote -v；
 本地新建的分支如果不推送到远程，对其他人就是不可见的；
-#####从本地推送分支
+##### 从本地推送分支
     $ git push origin branch-name
 如果推送失败，先用git pull抓取远程的新提交；
-#####在本地创建和远程分支对应的分支\
+##### 在本地创建和远程分支对应的分支\
     $ git checkout -b branch-name origin/branch-name
 本地和远程分支的名称最好一致；
-#####建立本地分支和远程分支的关联
+##### 建立本地分支和远程分支的关联
     $ git branch --set-upstream branch-name origin/branch-name
-#####从远程抓取分支
+##### 从远程抓取分支
     $ git pull
 如果有冲突，要先处理冲突。
 
-####标签
+#### 标签
 git标签是版本库的快照，实际就是某个commit的指针，如果要找到某次版本的commit号，数字复杂不好找，使用tag取一个易于记住和理解的名字就方便许多，它跟某个commit绑在一起。（类似于域名和IP地址的关系？）
-#####新建标签 
+##### 新建标签 
     $ git tag<tagname> 
 默认为HEAD，也可以指定一个commit id。
-#####查看标签信息
+##### 查看标签信息
     $ git show <tagname>
-#####创建带有说明的标签
+##### 创建带有说明的标签
     $git tag -a <tagname> -m <description> <branchname> or commit_id
 用-a指定标签名，-m指定说明文字
-#####查看所有标签
+##### 查看所有标签
     $ git tag
-#####推送某个标签到远程
+##### 推送某个标签到远程
     $ git push origin <tagname>
-#####一次性推送全部尚未推送到远程的本地标签
+##### 一次性推送全部尚未推送到远程的本地标签
     $ git push origin --tags
-#####删除一个本地标签
+##### 删除一个本地标签
     $ git tag -d <tagname>
-#####删除一个远程标签
+##### 删除一个远程标签
     $ git push origin :refs/tags/<tagname>
