@@ -2,7 +2,7 @@
 
 
 <center><h2>Git学习笔记</h2></center>
-### Git介绍  
+### Git介绍
 ***
 - Git是分布式版本控制系统
 - 集中式VS分布式：   
@@ -168,7 +168,7 @@ Git是如何跟踪修改的，每次修改，如果不用git add到暂存区，�
 ##### 从本地推送分支
     $ git push origin branch-name
 如果推送失败，先用git pull抓取远程的新提交；
-##### 在本地创建和远程分支对应的分支\
+##### 在本地创建和远程分支对应的分支
     $ git checkout -b branch-name origin/branch-name
 本地和远程分支的名称最好一致；
 ##### 建立本地分支和远程分支的关联
